@@ -1,0 +1,11 @@
+C:\Users\achia\OneDrive\Desktop\Midterm\LibraryTerminal\bin\Debug\netcoreapp2.2\LibraryTerminal.deps.json
+C:\Users\achia\OneDrive\Desktop\Midterm\LibraryTerminal\bin\Debug\netcoreapp2.2\LibraryTerminal.runtimeconfig.json
+C:\Users\achia\OneDrive\Desktop\Midterm\LibraryTerminal\bin\Debug\netcoreapp2.2\LibraryTerminal.runtimeconfig.dev.json
+C:\Users\achia\OneDrive\Desktop\Midterm\LibraryTerminal\bin\Debug\netcoreapp2.2\LibraryTerminal.dll
+C:\Users\achia\OneDrive\Desktop\Midterm\LibraryTerminal\bin\Debug\netcoreapp2.2\LibraryTerminal.pdb
+C:\Users\achia\OneDrive\Desktop\Midterm\LibraryTerminal\obj\Debug\netcoreapp2.2\LibraryTerminal.csprojAssemblyReference.cache
+C:\Users\achia\OneDrive\Desktop\Midterm\LibraryTerminal\obj\Debug\netcoreapp2.2\LibraryTerminal.csproj.CoreCompileInputs.cache
+C:\Users\achia\OneDrive\Desktop\Midterm\LibraryTerminal\obj\Debug\netcoreapp2.2\LibraryTerminal.AssemblyInfoInputs.cache
+C:\Users\achia\OneDrive\Desktop\Midterm\LibraryTerminal\obj\Debug\netcoreapp2.2\LibraryTerminal.AssemblyInfo.cs
+C:\Users\achia\OneDrive\Desktop\Midterm\LibraryTerminal\obj\Debug\netcoreapp2.2\LibraryTerminal.dll
+C:\Users\achia\OneDrive\Desktop\Midterm\LibraryTerminal\obj\Debug\netcoreapp2.2\LibraryTerminal.pdb
