@@ -39,63 +39,95 @@ namespace LibraryTerminal
 
                 }
                 else if (selection == 3)
-                {
+                { //search by title
                     Console.WriteLine("Type by book title.");
                     string title = Console.ReadLine();
                     List<BookClass> hey = SearchTitle(title);
                     DisplayBooks(hey);
-                    //search by title
+                    
                 }
                 else if (selection == 4)
                 {
-
-                    //return book
-                    Console.WriteLine("\nType 'in' or 'out' if the book is in.");
-                    string inThere = Console.ReadLine();
-                    List<BookClass> OhItMightBeThere = InThere(inThere);
-                    DisplayBooks(OhItMightBeThere);
-                    again = true;
+                    SearchAvailability();
+                   
                 }
                 else if (selection == 5)
                 {
                     //return book
-                    Console.WriteLine("\nType in or out if the book is in.");
-                    string inThere = Console.ReadLine();
+                    Console.WriteLine("\nType 'in' or 'out' if the book is in.");
+                    string inThere = Console.ReadLine().ToLower();
+                    
                     List<BookClass> OhItMightBeThere = InThere(inThere);
                     DisplayBooks(OhItMightBeThere);
-                    Console.WriteLine("Would you like to check book out? 1.y 2.n");
-                    int count = 0;
-                    string submit = Console.ReadLine();
-                    //int integer = int.Parse(submit);
-                    if (submit == "yes" || submit == "y")
+                    if(inThere == "out")
                     {
-                        count++;
-                        Console.WriteLine("Type in a author.");
-                        string author = Console.ReadLine();
-                        //int submission = int.Parse(author);
-                        ListOfLists.books[count].Author = "out";
-                        Console.WriteLine(author[count]);
-                        //wtf??????????!?!?!?!?!?!?
-                        
+                        List<BookClass> OhItsNot = InThere(inThere);
+                        DisplayBooks(OhItsNot);
+                        Console.WriteLine("Would you like to return book? y/n");
+                        string accept = Console.ReadLine().ToLower();
+                        if(accept == "yes" || accept == "y")
+                        {
+                            Console.WriteLine("Type in a title.");
+                            string title = Console.ReadLine().ToLower();
+
+                            for (int i = 0; i < ListOfLists.books.Count; i++)
+                            {
+                                if (title == ListOfLists.books[i].Title.ToLower())
+                                {
+                                    ListOfLists.books[i].Availability = "in";
+                                    Console.WriteLine($"{ListOfLists.books[i].Title} has been return and is now {ListOfLists.books[i].Availability}.");
+                                }
+                            }
+                            
+                            DisplayBooks(ListOfLists.books);
+
+                        }
+                        else
+                        {
+                            Display();
+                        }
 
                     }
-                    //count++;
+                    else if(inThere == "in")
+                    {
+                        List<BookClass> OhItsNot = InThere(inThere);
+                        DisplayBooks(OhItsNot);
+                        Console.WriteLine("Would you like to check book out? y/n");
+                        string submit = Console.ReadLine().ToLower();
+                        //int integer = int.Parse(submit);
+                        if (submit == "yes" || submit == "y")
+                        {
+                            Console.WriteLine("Type in a title.");
+                            string title = Console.ReadLine().ToLower();
+
+                            for (int i = 0; i < ListOfLists.books.Count; i++)
+                            {
+                                if (title == ListOfLists.books[i].Title.ToLower())
+                                {
+                                    ListOfLists.books[i].Availability = "out";
+                                    ListOfLists.books[i].DueDate = (DateTime.Now.Date).AddDays(14);
+                                    Console.WriteLine($"\n{ListOfLists.books[i].DueDate} is when it needs to be returned.");
+                                }
+                            }
+                            Console.WriteLine();
+                            DisplayBooks(ListOfLists.books);
+                        }
+                    }
+                    
                 }
                 else if (selection == 6)
                 {
 
                     Quit();
-                    Console.WriteLine("See you soon! Return your books!");
+                    Console.WriteLine("\nSee you soon nerd!");
                     again = false;
                 }
                 else
                 {
-                    //try again 
+                    Console.WriteLine("Try again.");
                     again = false;
                 }
             }
-
-
         }
 
         public static bool Quit()
@@ -111,7 +143,7 @@ namespace LibraryTerminal
             Console.WriteLine("\t2. Search By Author");
             Console.WriteLine("\t3. Search By Title");
             Console.WriteLine("\t4. Check Availability ");
-            Console.WriteLine("\t5. Return Book");
+            Console.WriteLine("\t5. Check Out/Return Book");
             Console.WriteLine("\t6. Leave");
 
         }
@@ -140,12 +172,7 @@ namespace LibraryTerminal
             }
 
         }
-        /*public static int Parse()
-        {
-            string input = Console.ReadLine();
-            int number = int.Parse(input);
-            return number;
-        }*/
+      
         public static void DisplayBooks(List<BookClass> classics)
         {
             foreach (BookClass pages in classics)
@@ -153,7 +180,7 @@ namespace LibraryTerminal
                 Console.WriteLine(pages.Title);
                 Console.WriteLine(pages.Author);
                 Console.WriteLine(pages.Availability);
-                // Console.WriteLine(pages.DueDate.ToString("MM/dd/yyyy"));
+                Console.WriteLine(pages.DueDate.ToString("MM/dd/yyyy"));
                 Console.WriteLine();
 
             }
@@ -164,8 +191,8 @@ namespace LibraryTerminal
             {
                 Console.WriteLine(pages.Title);
                 Console.WriteLine(pages.Author);
-                Console.WriteLine(pages.Availability);
-                Console.WriteLine(pages.DueDate.ToString("MM/dd/yyyy"));
+               // Console.WriteLine(pages.Availability);
+               // Console.WriteLine(pages.DueDate.ToString("MM/dd/yyyy"));
                 Console.WriteLine();
             }
         }
@@ -182,7 +209,6 @@ namespace LibraryTerminal
             }
 
             return classics;
-
         }
 
         public static List<BookClass> SearchTitle(string title)
@@ -201,14 +227,12 @@ namespace LibraryTerminal
 
         public static List<BookClass> InThere(string available)
         {
-            int count = 0;
             List<BookClass> canYouCheck = new List<BookClass>();
-            foreach (BookClass x in ListOfLists.books)
+            foreach (BookClass isItIn in ListOfLists.books)
             {
-                count++;
-                if (x.Availability.ToLower() == available.ToLower())
+                if (isItIn.Availability.ToLower() == available.ToLower())
                 {
-                    canYouCheck.Add(x);
+                    canYouCheck.Add(isItIn);
                 }
 
             }
@@ -216,18 +240,14 @@ namespace LibraryTerminal
         }
         public static void SearchAvailability()
         {
-            int counter = 0;
-            foreach (BookClass available in ListOfLists.books)
+            foreach (BookClass pages in ListOfLists.books)
             {
-                counter++;
-                Console.WriteLine(available.Title);
-                Console.WriteLine(available.Author);
-                Console.WriteLine($"{counter}. available.Availability");
-                Console.WriteLine(available.DueDate.ToString("MM/dd/yyyy"));
+                Console.WriteLine(pages.Title);
+                Console.WriteLine(pages.Author);
+                Console.WriteLine(pages.Availability);
+                Console.WriteLine(pages.DueDate.ToString("MM/dd/yyyy"));
                 Console.WriteLine();
-
             }
         }
-
     }
 }
